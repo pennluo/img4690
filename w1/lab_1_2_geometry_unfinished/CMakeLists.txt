@@ -1,0 +1,39 @@
+cmake_minimum_required( VERSION 3.5.1 )
+
+project(lab_1_2_geometry)
+
+set(CMAKE_CXX_STANDARD 11)
+
+# Compiler flags
+set(compiler_options -Wall -Wextra -Wpedantic)
+
+# Find libraries
+find_package(OpenCV 3.3.1 REQUIRED)
+find_package(sophus REQUIRED)
+find_package(GeographicLib REQUIRED)
+
+add_executable(${PROJECT_NAME}
+  main.cpp
+  attitude.h
+  attitude.cpp
+  cartesian_position.h
+  cartesian_position.cpp
+  dataset.h
+  dataset.cpp
+  geodetic_position.h
+  geodetic_position.cpp
+  intrinsics.h
+  intrinsics.cpp
+  lab_1_2.h
+  lab_1_2.cpp
+  local_coordinate_system.h
+  local_coordinate_system.cpp
+  perspective_camera_model.h
+  perspective_camera_model.cpp
+  viewer_3d.h
+  viewer_3d.cpp
+  )
+
+target_link_libraries(${PROJECT_NAME} ${OpenCV_LIBS} ${GeographicLib_LIBRARIES})
+target_include_directories(${PROJECT_NAME} SYSTEM PRIVATE ${sophus_INCLUDE_DIRS})
+target_compile_options(${PROJECT_NAME} PRIVATE ${compiler_options})
